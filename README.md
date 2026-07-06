@@ -14,11 +14,20 @@ media type, and upstream errors keep their real status codes.
 
 1. **Get a DeepSeek API key** from [platform.deepseek.com](https://platform.deepseek.com) if you don't have one.
 
-2. **Start the server** with that key:
+2. **Install the server:**
+
+   ```sh
+   go install github.com/namtx/mydeepseek@latest
+   ```
+
+   This puts a `mydeepseek` binary on your `$PATH` (requires Go 1.22+).
+   Alternatively, clone and `make build` to get the `fake-ollama` binary.
+
+3. **Start the server** with that key:
 
    ```sh
    export DEEPSEEK_API_KEY=sk-...
-   go run .
+   mydeepseek
    ```
 
    You should see `fake ollama server listening on 127.0.0.1:11435 (upstream https://api.deepseek.com)`.
