@@ -1,14 +1,41 @@
-# mydeepseek — fake Ollama server backed by DeepSeek
+# DeepSeek AI provider for Raycast
 
-A single-binary Go server that speaks the Ollama REST API and proxies every
-chat request to the DeepSeek cloud API. Point Raycast's built-in **Local
-Models** integration at it and use `deepseek-chat` / `deepseek-reasoner` as
-if they were local Ollama models.
+Use DeepSeek (`deepseek-chat` / `deepseek-reasoner`) as a native AI model
+inside Raycast — no Ollama installation required. A lightweight Go server
+speaks the Ollama REST API and proxies every request to the DeepSeek cloud
+API, so Raycast's built-in **Local Models** integration works out of the box.
 
 Go port of [RobToMars/DeepSeek `fake_ollama_server.py`](https://github.com/RobToMars/DeepSeek/blob/main/fake_ollama_server.py),
 with fixes: `deepseek-reasoner`'s reasoning streams as Ollama's native
 `message.thinking`, sampling options pass through, NDJSON uses the correct
 media type, and upstream errors keep their real status codes.
+
+## Installation
+
+### From package (recommended)
+
+Requires Go 1.22+:
+
+```sh
+go install github.com/namtx/mydeepseek@latest
+```
+
+This installs a `mydeepseek` binary to `$GOPATH/bin` (usually `~/go/bin`).
+Make sure that directory is on your `$PATH`.
+
+### Build from source
+
+```sh
+git clone https://github.com/namtx/mydeepseek.git
+cd mydeepseek
+make build        # produces ./fake-ollama
+```
+
+Or without Make:
+
+```sh
+go build -o fake-ollama .
+```
 
 ## Setup: add DeepSeek as a Raycast AI provider
 
@@ -18,7 +45,9 @@ media type, and upstream errors keep their real status codes.
 
    ```sh
    export DEEPSEEK_API_KEY=sk-...
-   go run .
+   mydeepseek          # if installed via go install
+   # or
+   ./fake-ollama       # if built from source
    ```
 
    You should see `fake ollama server listening on 127.0.0.1:11435 (upstream https://api.deepseek.com)`.
