@@ -1,9 +1,9 @@
-# mydeepseek — fake Ollama server backed by DeepSeek
+# DeepSeek AI provider for Raycast
 
-A single-binary Go server that speaks the Ollama REST API and proxies every
-chat request to the DeepSeek cloud API. Point Raycast's built-in **Local
-Models** integration at it and use `deepseek-chat` / `deepseek-reasoner` as
-if they were local Ollama models.
+Use DeepSeek (`deepseek-chat` / `deepseek-reasoner`) as a native AI model
+inside Raycast — no Ollama installation required. A lightweight Go server
+speaks the Ollama REST API and proxies every request to the DeepSeek cloud
+API, so Raycast's built-in **Local Models** integration works out of the box.
 
 Go port of [RobToMars/DeepSeek `fake_ollama_server.py`](https://github.com/RobToMars/DeepSeek/blob/main/fake_ollama_server.py),
 with fixes: `deepseek-reasoner`'s reasoning streams as Ollama's native
